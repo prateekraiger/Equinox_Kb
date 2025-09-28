@@ -1,0 +1,31 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Period"
+						}
+					}
+				]
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Sunt culpa nulla sint. Adipisicing magna tempor officia ipsum sint voluptate ullamco do laboris officia tempor. Mollit ut et nulla elit ad aliquip incididunt quis duis culpa in magna eu velit."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
