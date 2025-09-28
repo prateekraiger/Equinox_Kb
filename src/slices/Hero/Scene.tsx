@@ -1,6 +1,7 @@
 "use client";
 
 import { Keyboard } from "@/components/Keyboard";
+import { Keycap } from "@/components/Keycap";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
 import { useControls } from "leva";
 
@@ -19,11 +20,23 @@ export function Scene() {
     <group>
       <PerspectiveCamera makeDefault position={[0, 0, 4]} fov={50} />
 
-      <Keyboard
+      {/* <Keyboard
         scale={9}
         position={[0.2, -0.5, 1.9]}
         rotation={[1.6, 0.4, 0]}
-      />
+      /> */}
+
+      <group>
+        <Keycap position={[0, -0.4, 2.6]} />
+        <Keycap position={[-1.4, 0, 2.3]} />
+        <Keycap position={[-1.8, 1, 1.5]} />
+        <Keycap position={[0, 1, 1]} />
+        <Keycap position={[1.3, -0.3, 2.3]} />
+        <Keycap position={[0, 1, 2]} />
+        <Keycap position={[-0.7, 0.6, 2]} />
+        <Keycap position={[-0.77, 0.1, 2.8]} />
+        <Keycap position={[2, 0, 1]} />
+      </group>
 
       <Environment
         files={["/hdr/blue-studio.hdr"]}
