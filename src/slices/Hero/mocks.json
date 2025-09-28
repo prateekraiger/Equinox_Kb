@@ -1,0 +1,36 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Discovery"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Quis sint est veniam enim ipsum nulla esse est consectetur consectetur minim eu irure. Exercitation in dolor do adipisicing sit nostrud laborum eu enim. Duis cupidatat deserunt commodo officia consequat veniam nulla."
+						}
+					}
+				]
+			},
+			"buy_button_text": {
+				"__TYPE__": "FieldContent",
+				"value": "library",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]
