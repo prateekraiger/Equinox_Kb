@@ -1,18 +1,62 @@
 import { Keyboard } from "@/components/Keyboard";
 import { Stage, useTexture } from "@react-three/drei";
 import { KEYCAP_TEXTURES } from ".";
-import { useMemo } from "react";
+import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
+gsap.registerPlugin(useGSAP);
 
 type SceneProps = {
   selectedTextureId: string;
   onAnimateComplete: () => void;
 };
 
-export function Scene({ selectedTextureId }: SceneProps) {
+export function Scene({ selectedTextureId, onAnimateComplete }: SceneProps) {
+  const keyboardRef = useRef<THREE.Group>(null);
   const texturePaths = KEYCAP_TEXTURES.map((t) => t.path);
   const textures = useTexture(texturePaths);
+  const [currentTextureId, setCurrentTextureId] = useState(selectedTextureId);
 
+  useGSAP(() => {
+    if (!keyboardRef.current || selectedTextureId === currentTextureId) return;
+
+    const mm = gsap.matchMedia();
+
+    mm.add("prefers-reduced-motion:no-preference", () => {
+      const keyboard = keyboardRef.current;
+      if (!keyboard) return;
+
+      const t1 = gsap.timeline({
+        onComplete: () => {
+          onAnimateComplete();
+        },
+      });
+
+      t1.to(keyboard.position, {
+        y: 0.3,
+        duration: 0.4,
+        ease: "power2.out",
+        onComplete: () => {
+          setCurrentTextureId(selectedTextureId);
+        },
+      });
+      t1.to(keyboard.position, {
+        y: 0,
+        duration: 0.6,
+        ease: "elastic.out(1,0.4)",
+      });
+    });
+
+    mm.add("prefers-reduced-motion:reduce", () => {
+      setCurrentTextureId(selectedTextureId);
+      onAnimateComplete();
+    });
+  }, [selectedTextureId, currentTextureId]);
+
+
+  
   const materials = useMemo(() => {
     const materialMap: { [key: string]: THREE.MeshStandardMaterial } = {};
 
@@ -39,9 +83,9 @@ export function Scene({ selectedTextureId }: SceneProps) {
 
   return (
     <Stage environment={"city"} intensity={0.05} shadows="contact">
-      <group>
+      <group ref={keyboardRef}>
         <Keyboard
-          keycapMaterial={materials[selectedTextureId]}
+          keycapMaterial={materials[currentTextureId]}
           knobColor={currentKnobColor}
         />
       </group>
