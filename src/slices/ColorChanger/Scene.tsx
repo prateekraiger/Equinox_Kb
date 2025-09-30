@@ -1,3 +1,5 @@
+"use client";
+
 import { Keyboard } from "@/components/Keyboard";
 import { Stage, useTexture } from "@react-three/drei";
 import { KEYCAP_TEXTURES } from ".";
@@ -10,10 +12,10 @@ gsap.registerPlugin(useGSAP);
 
 type SceneProps = {
   selectedTextureId: string;
-  onAnimateComplete: () => void;
+  onAnimationComplete: () => void;
 };
 
-export function Scene({ selectedTextureId, onAnimateComplete }: SceneProps) {
+export function Scene({ selectedTextureId, onAnimationComplete }: SceneProps) {
   const keyboardRef = useRef<THREE.Group>(null);
   const texturePaths = KEYCAP_TEXTURES.map((t) => t.path);
   const textures = useTexture(texturePaths);
@@ -23,18 +25,17 @@ export function Scene({ selectedTextureId, onAnimateComplete }: SceneProps) {
     if (!keyboardRef.current || selectedTextureId === currentTextureId) return;
 
     const mm = gsap.matchMedia();
-
-    mm.add("prefers-reduced-motion:no-preference", () => {
+    mm.add("(prefers-reduced-motion: no-preference", () => {
       const keyboard = keyboardRef.current;
       if (!keyboard) return;
 
-      const t1 = gsap.timeline({
+      const tl = gsap.timeline({
         onComplete: () => {
-          onAnimateComplete();
+          onAnimationComplete();
         },
       });
 
-      t1.to(keyboard.position, {
+      tl.to(keyboard.position, {
         y: 0.3,
         duration: 0.4,
         ease: "power2.out",
@@ -42,21 +43,19 @@ export function Scene({ selectedTextureId, onAnimateComplete }: SceneProps) {
           setCurrentTextureId(selectedTextureId);
         },
       });
-      t1.to(keyboard.position, {
+      tl.to(keyboard.position, {
         y: 0,
         duration: 0.6,
         ease: "elastic.out(1,0.4)",
       });
     });
 
-    mm.add("prefers-reduced-motion:reduce", () => {
+    mm.add("(prefers-reduced-motion: reduce", () => {
       setCurrentTextureId(selectedTextureId);
-      onAnimateComplete();
+      onAnimationComplete();
     });
   }, [selectedTextureId, currentTextureId]);
 
-
-  
   const materials = useMemo(() => {
     const materialMap: { [key: string]: THREE.MeshStandardMaterial } = {};
 

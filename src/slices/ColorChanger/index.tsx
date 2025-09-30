@@ -112,7 +112,7 @@ const ColorChanger: FC<ColorChangerProps> = ({ slice }) => {
       >
         <Scene
           selectedTextureId={selectedTextureId}
-          onAnimateComplete={handleAnimationComplete}
+          onAnimationComplete={handleAnimationComplete}
         ></Scene>
       </Canvas>
 

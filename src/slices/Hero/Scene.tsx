@@ -42,7 +42,7 @@ export function Scene() {
       </group>
       <Environment
         files={["/hdr/blue-studio.hdr"]}
-        environmentIntensity={0.05}
+        environmentIntensity={0.2}
       />
 
       <spotLight
