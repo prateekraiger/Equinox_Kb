@@ -98,7 +98,7 @@ const ColorChanger: FC<ColorChangerProps> = ({ slice }) => {
           className="font-black-slanted fill-white/20 uppercase group-hover:fill-white/30 motion-safe:transition-all motion-safe:duration-700"
         >
           {Array.from({ length: 20 }, (_, i) => (
-            <tspan key={i} x={`${(i + 1) * 10} % `} dy={i === 0 ? -50 : 6}>
+            <tspan key={i} x={`${(i + 1) * 10}%`} dy={i === 0 ? -50 : 6}>
               {Array.from({ length: 10 }, () => backgroundText).join("")}
             </tspan>
           ))}
