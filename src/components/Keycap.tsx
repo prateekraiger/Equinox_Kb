@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { Float, useGLTF, useTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { uv } from "three/tsl";
 
 type KeycapProps = {
   position?: [number, number, number];
@@ -47,8 +46,8 @@ export function Keycap({
   });
 
   return (
-    <Float rotationIntensity={3}>
-      <group dispose={null} position={position} rotation={rotation}>
+    <Float rotationIntensity={3} position={position} rotation={rotation}>
+      <group dispose={null}>
         <mesh
           castShadow
           receiveShadow
